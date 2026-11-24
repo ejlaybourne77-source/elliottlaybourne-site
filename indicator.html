@@ -1,0 +1,212 @@
+<title>VIX:VIX3M Regime Indicator - Install Guide | Elliott Laybourne</title>
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0e14; --panel:#0f1621; --rule:#1c2634;
+    --ink:#e8edf4; --dim:#8a97a8; --faint:#4a5666;
+    --amber:#f0b429; --up:#26d07c; --down:#ff5c5c;
+    --serif:"Fraunces",Georgia,serif; --sans:"Inter",-apple-system,"Segoe UI",sans-serif; --mono:"JetBrains Mono",monospace;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);
+    line-height:1.65;font-size:16px;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:760px;margin:0 auto;padding:48px 22px 96px}
+  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:2.5px;text-transform:uppercase;color:var(--amber);margin:0 0 14px}
+  h1{font-family:var(--serif);font-weight:600;font-size:40px;line-height:1.1;letter-spacing:-.5px;margin:0 0 14px}
+  .lede{font-size:18px;color:var(--dim);margin:0 0 40px;max-width:60ch}
+  h2{font-family:var(--serif);font-weight:600;font-size:24px;margin:44px 0 10px;letter-spacing:-.2px}
+  p{margin:0 0 16px;color:#d7dee8}
+  .rule{height:1px;background:var(--rule);border:0;margin:40px 0}
+  .card{background:var(--panel);border:1px solid var(--rule);border-radius:12px;padding:20px 22px;margin:0 0 20px}
+  .card h2{margin-top:0}
+  .ladder{display:flex;flex-direction:column;gap:8px;margin:6px 0 4px}
+  .lrow{display:flex;align-items:center;gap:12px}
+  .lsw{width:26px;height:14px;border-radius:3px;flex:none}
+  .lnm{font-weight:600;width:96px}
+  .lrg{font-family:var(--mono);color:var(--dim);font-size:13px}
+  ol.steps{list-style:none;counter-reset:s;padding:0;margin:8px 0 0}
+  ol.steps li{counter-increment:s;position:relative;padding:0 0 20px 52px;min-height:34px}
+  ol.steps li::before{content:counter(s);position:absolute;left:0;top:-2px;width:34px;height:34px;
+    border-radius:50%;background:rgba(240,180,41,.12);border:1px solid var(--amber);color:var(--amber);
+    font-family:var(--mono);font-weight:700;font-size:15px;display:flex;align-items:center;justify-content:center}
+  ol.steps li:not(:last-child)::after{content:"";position:absolute;left:16.5px;top:36px;bottom:2px;width:1px;background:var(--rule)}
+  ol.steps b{color:var(--ink)}
+  .codehead{display:flex;justify-content:space-between;align-items:center;margin:8px 0 8px}
+  .codehead span{font-family:var(--mono);font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--dim)}
+  button.copy{font-family:var(--mono);font-size:12px;letter-spacing:1px;text-transform:uppercase;
+    background:transparent;color:var(--amber);border:1px solid var(--amber);border-radius:6px;padding:6px 12px;cursor:pointer}
+  button.copy:hover{background:rgba(240,180,41,.1)}
+  pre{background:#070b11;border:1px solid var(--rule);border-radius:12px;padding:18px;overflow-x:auto;margin:0}
+  code{font-family:var(--mono);font-size:12.5px;line-height:1.6;color:#cdd6e2;white-space:pre}
+  .note{border-left:2px solid var(--amber);padding:2px 0 2px 16px;color:var(--dim);margin:16px 0}
+  .kbd{font-family:var(--mono);font-size:12px;background:#070b11;border:1px solid var(--rule);border-radius:4px;padding:1px 6px;color:var(--ink)}
+  footer{margin-top:56px;padding-top:24px;border-top:1px solid var(--rule);color:var(--faint);font-size:13px}
+  footer a{color:var(--dim);text-decoration:none} footer a:hover{color:var(--amber)}
+  .social{margin:44px 0 0;padding-top:22px;border-top:1px solid var(--rule)}
+  .social .sk{font-family:var(--mono);font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--amber);margin:0 0 12px}
+  .social .srow{display:flex;gap:28px;flex-wrap:wrap}
+  .social .srow a{font-family:var(--mono);font-size:12.5px;letter-spacing:1px;text-transform:uppercase;color:var(--dim);text-decoration:none}
+  .social .srow a:hover{color:var(--amber)}
+  .wordmark{font-family:var(--mono);letter-spacing:2px;font-size:12px;color:var(--dim);text-transform:uppercase;margin:0 0 40px}
+</style>
+
+<div class="wrap">
+  <div class="wordmark">Elliott&nbsp;Laybourne</div>
+
+  <p class="eyebrow">Free Tool · Install Guide</p>
+  <h1>Add the VIX:VIX3M regime indicator to TradingView</h1>
+  <p class="lede">The volatility term-structure ratio the desks watch to see trouble coming. It installs manually in about two minutes. Copy the code below into TradingView's Pine Editor and add it to your chart.</p>
+
+  <div class="card">
+    <h2>What you're installing</h2>
+    <p>This plots the ratio of <b>VIX</b> (30-day implied volatility) to <b>VIX3M</b> (3-month). When near-term fear spikes above longer-term, the ratio climbs, and history shows the concurrent stress in the market rises with it. The indicator colours that reading into five regimes:</p>
+    <div class="ladder">
+      <div class="lrow"><span class="lsw" style="background:#17C25F"></span><span class="lnm">Calm</span><span class="lrg">&lt; 0.85 · baseline vol</span></div>
+      <div class="lrow"><span class="lsw" style="background:#9AD52A"></span><span class="lnm">Normal</span><span class="lrg">0.85 to 0.95</span></div>
+      <div class="lrow"><span class="lsw" style="background:#FFB300"></span><span class="lnm">Stressed</span><span class="lrg">0.95 to 1.00 · ~2× vol</span></div>
+      <div class="lrow"><span class="lsw" style="background:#FB6A00"></span><span class="lnm">Severe</span><span class="lrg">1.00 to 1.05 · ~3× vol</span></div>
+      <div class="lrow"><span class="lsw" style="background:#F5333C"></span><span class="lnm">Extreme</span><span class="lrg">&gt; 1.05 · ~4× vol</span></div>
+    </div>
+    <p style="margin-top:16px">The dashed line at <b>0.95</b> is the one to watch: that's where near-term stress historically begins to bite. This is a context and risk-regime tool, not a buy/sell signal.</p>
+  </div>
+
+  <h2>Install in six steps</h2>
+  <ol class="steps">
+    <li>Open <b>TradingView</b> and load any chart: SPX, ES or SPY make good context.</li>
+    <li>At the bottom of the screen, click the <b>Pine Editor</b> tab to open the editor panel.</li>
+    <li>Select everything already in the editor (<span class="kbd">Ctrl/Cmd + A</span>) and delete it.</li>
+    <li>Copy the code below and <b>paste</b> it into the empty editor (<span class="kbd">Ctrl/Cmd + V</span>).</li>
+    <li>Click <b>Save</b> (top-right of the editor), name it <i>VIX:VIX3M Regime</i>.</li>
+    <li>Click <b>Add to chart</b>. The indicator appears in its own pane below price.</li>
+  </ol>
+
+  <div class="codehead">
+    <span>The indicator code</span>
+    <button class="copy" id="copyBtn">Copy code</button>
+  </div>
+  <pre><code id="code">//@version=6
+indicator("VIX:VIX3M regime (premium)", shorttitle="VIX:VIX3M", overlay=false)
+
+// ---- data ----
+vixSym   = input.symbol("CBOE:VIX",   "VIX (30d)")
+vix3mSym = input.symbol("CBOE:VIX3M", "VIX3M (3m)")
+float vix   = request.security(vixSym,   timeframe.period, close)
+float vix3m = request.security(vix3mSym, timeframe.period, close)
+float ratio = na(vix) or na(vix3m) or vix3m == 0 ? na : vix / vix3m
+
+// ---- thresholds ----
+g     = "Bands"
+bLow  = input.float(0.85, "Calm / Normal",             step=0.01, group=g)
+bMid  = input.float(0.95, "Normal / Stressed (DIVIDER)",step=0.01, group=g)
+bBase = input.float(1.00, "Stressed / Severe",          step=0.01, group=g)
+bExt  = input.float(1.05, "Severe / Extreme",          step=0.01, group=g)
+bFloor= input.float(0.80, "Floor anchor",              step=0.01, group=g)
+bCeil = input.float(1.25, "Ceiling anchor",            step=0.01, group=g)
+
+// ---- palette ----
+gc        = "Colours"
+cCalm     = input.color(#17C25F, "Calm  (green)",   group=gc)
+cNormal   = input.color(#9AD52A, "Normal (lime)",   group=gc)
+cStressed = input.color(#FFB300, "Stressed (amber)",group=gc)
+cSevere   = input.color(#FB6A00, "Severe (orange)", group=gc)
+cExtreme  = input.color(#F5333C, "Extreme (red)",   group=gc)
+bandTp    = input.int(82, "Band fade (higher = fainter)", minval=50, maxval=95, group=gc)
+sepCol    = input.color(#C9D2DE, "Zone separators (off-grey)", group=gc)
+divCol    = input.color(#EAF0F8, "0.95 divider",    group=gc)
+
+// ---- display ----
+gd       = "Display"
+lineW    = input.int(2, "Line thickness", minval=1, maxval=5, group=gd)
+outlineW = input.int(3, "Black outline (extra px)", minval=0, maxval=6, group=gd)
+showKey  = input.bool(true, "Show key bar", group=gd)
+keyLoc   = input.string("Top", "Key location", options=["Top","Bottom"], group=gd)
+showBrand= input.bool(true, "Show brand mark", group=gd)
+brandTxt = input.string("ELLIOTT LAYBOURNE", "Brand text", group=gd)
+
+// ---- current regime ----
+int lvl = na(ratio) ? -1 : ratio < bLow ? 0 : ratio < bMid ? 1 : ratio < bBase ? 2 : ratio < bExt ? 3 : 4
+
+// ---- band boundaries + off-grey separators ----
+hF = hline(bFloor, "", color=color.new(color.gray, 100))
+h1 = hline(bLow,   "", color=color.new(sepCol, 30), linestyle=hline.style_dashed)
+h2 = hline(bMid,   "0.95 · CALM | STRESSED", color=color.new(divCol, 15), linestyle=hline.style_dashed, linewidth=1)
+h3 = hline(bBase,  "", color=color.new(sepCol, 30), linestyle=hline.style_dashed)
+h4 = hline(bExt,   "", color=color.new(sepCol, 30), linestyle=hline.style_dashed)
+hC = hline(bCeil,  "", color=color.new(color.gray, 100))
+
+// ---- faded band fills ----
+fill(hF, h1, color=color.new(cCalm,     bandTp))
+fill(h1, h2, color=color.new(cNormal,   bandTp))
+fill(h2, h3, color=color.new(cStressed, bandTp))
+fill(h3, h4, color=color.new(cSevere,   bandTp))
+fill(h4, hC, color=color.new(cExtreme,  bandTp))
+
+// ---- white line with medium black outline ----
+plot(ratio, "outline",   color=color.new(#000000, 0), linewidth=lineW + outlineW)
+plot(ratio, "VIX:VIX3M", color=color.new(#FFFFFF, 0), linewidth=lineW)
+
+// ---- key bar: swatch + name + range; active = solid pill ----
+f_num(x) => str.tostring(x, "#.##")
+zName = array.from("CALM", "NORMAL", "STRESSED", "SEVERE", "EXTREME")
+zCol  = array.from(cCalm, cNormal, cStressed, cSevere, cExtreme)
+zLo   = array.from(0.0,  bLow, bMid,  bBase, 0.0)
+zHi   = array.from(bLow, bMid, bBase, bExt,  0.0)
+kPos  = keyLoc == "Top" ? position.top_center : position.bottom_center
+var table k = table.new(kPos, 10, 1, frame_width=0, border_width=0)
+if barstate.islast and showKey
+    for i = 0 to 4
+        bool  on  = lvl == i
+        color col = array.get(zCol, i)
+        string rng = i == 0 ? "<" + f_num(bLow) : i == 4 ? ">" + f_num(bExt) : f_num(array.get(zLo, i)) + "-" + f_num(array.get(zHi, i))
+        table.cell(k, i*2, 0, "  ", bgcolor=col)
+        string t = " " + array.get(zName, i) + " " + rng + (on ? "  " + str.tostring(ratio, "#.###") + " ◀" : "") + " "
+        table.cell(k, i*2+1, 0, t, bgcolor=on ? col : color.new(#0B1220, 0), text_color=on ? color.new(#08101E, 0) : color.new(color.white, 15), text_size=size.small, text_halign=text.align_left)
+
+// ---- brand mark ----
+var table b = table.new(position.bottom_left, 1, 1)
+if barstate.islast and showBrand
+    table.cell(b, 0, 0, brandTxt, text_color=color.new(color.white, 55), text_size=size.small)
+
+// ---- bonus alerts (fire on regime flips; usable on paid TradingView plans) ----
+alertcondition(ta.crossover(ratio,  bMid),  title="Entered STRESSED (>0.95)", message="VIX:VIX3M crossed above 0.95, stress regime begins")
+alertcondition(ta.crossover(ratio,  bBase), title="Entered SEVERE (>1.00)",   message="VIX:VIX3M crossed above 1.00, severe stress / backwardation")
+alertcondition(ta.crossover(ratio,  bExt),  title="Entered EXTREME (>1.05)",  message="VIX:VIX3M crossed above 1.05, extreme stress")
+alertcondition(ta.crossunder(ratio, bMid),  title="Back to CALM (<0.95)",     message="VIX:VIX3M crossed below 0.95, stress easing")</code></pre>
+
+  <h2>Reading it once it's on your chart</h2>
+  <p>The white line is the live ratio. The coloured bands behind it are the regimes; the key along the top highlights the one you're in right now, with the current value. When the line pushes up through the <b>0.95</b> divider, near-term volatility is running hot relative to the term, and the market is starting to price trouble. Above 1.00 is genuine stress; above 1.05 is rare, crisis-grade territory.</p>
+
+  <div class="note">
+    The script reads <span class="kbd">CBOE:VIX</span> and <span class="kbd">CBOE:VIX3M</span>. Both are available on a free TradingView plan for daily data. If a symbol doesn't resolve on your account, swap it for <span class="kbd">TVC:VIX</span> / <span class="kbd">INDEX:VIX3M</span> in the indicator's settings.
+  </div>
+
+  <div class="social">
+    <p class="sk">Come find me</p>
+    <div class="srow">
+      <a href="https://www.youtube.com/@elliottlayb">YouTube</a>
+      <a href="https://instagram.com/elliottlayb">Instagram</a>
+      <a href="https://x.com/elliottlayb">X / Twitter</a>
+    </div>
+  </div>
+
+  <footer>
+    <p><b style="color:var(--dim)">ELLIOTT&nbsp;LAYBOURNE</b> · <a href="https://www.elliottlaybourne.com">elliottlaybourne.com</a></p>
+    <p>Educational tool for market context only. Not financial advice, and not a signal service. Markets carry risk; do your own research.</p>
+  </footer>
+</div>
+
+<script>
+  (function(){
+    var btn=document.getElementById('copyBtn'), code=document.getElementById('code');
+    btn.addEventListener('click',function(){
+      var t=code.innerText;
+      function done(){var o=btn.textContent;btn.textContent='Copied ✓';setTimeout(function(){btn.textContent=o;},1800);}
+      if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(done,fallback);}else{fallback();}
+      function fallback(){try{var ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);done();}catch(e){var r=document.createRange();r.selectNodeContents(code);var s=getSelection();s.removeAllRanges();s.addRange(r);btn.textContent='Selected, press Ctrl/Cmd+C';}}
+    });
+  })();
+</script>
